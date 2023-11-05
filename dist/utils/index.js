@@ -1,3 +1,14 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,23 +45,69 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { loadConfig } from "unconfig";
-(function () { return __awaiter(void 0, void 0, void 0, function () {
-    var config;
+import XLSX from 'xlsx';
+import fs from 'fs';
+/**
+ * 获取xlsx数据
+ * @param fromXlsxPath
+ * @returns
+ */
+export var getXlsx = function (path) {
+    var workbook = XLSX.readFile(path !== null && path !== void 0 ? path : '/');
+    // 获取第一个工作表
+    var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+    // 将工作表转换为JSON对象
+    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+    return jsonData;
+};
+export var getJson = function (path) { return __awaiter(void 0, void 0, void 0, function () {
+    var jsonData;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, loadConfig({
-                    sources: [
-                        {
-                            files: 'translate.config',
-                            extensions: ['ts', 'js']
+            case 0:
+                jsonData = {};
+                return [4 /*yield*/, fs.readFile(path !== null && path !== void 0 ? path : '/', 'utf8', function (err, data) {
+                        if (err) {
+                            console.error("Error reading JSON file: ".concat(err));
+                            return;
                         }
-                    ]
-                })];
+                        try {
+                            jsonData = JSON.parse(data);
+                        }
+                        catch (parseError) {
+                            console.error("Error parsing JSON data: ".concat(parseError));
+                        }
+                    })];
             case 1:
-                config = (_a.sent()).config;
-                console.log('config===>', config);
-                return [2 /*return*/];
+                _a.sent();
+                return [2 /*return*/, jsonData];
         }
     });
-}); })();
+}); };
+/**
+ * 获取已有翻译json
+ * @param config
+ * @returns
+ */
+export var getTranslateMap = function (config) {
+    var _a;
+    var translateMap = (_a = config.translate) === null || _a === void 0 ? void 0 : _a.map(function (item) { return (__assign(__assign({}, item), { map: new Map() })); });
+    translateMap.forEach(function (item, index) { return __awaiter(void 0, void 0, void 0, function () {
+        var jsonData, json;
+        return __generator(this, function (_a) {
+            try {
+                jsonData = fs.readFileSync(item.outPath, 'utf8');
+                json = JSON.parse(jsonData);
+                Object.entries(json).forEach(function (_a) {
+                    var key = _a[0], value = _a[1];
+                    translateMap[index].map.set(key, value);
+                });
+            }
+            catch (error) {
+                console.error('读取 JSON 文件时出错：', error);
+            }
+            return [2 /*return*/];
+        });
+    }); });
+    return translateMap;
+};

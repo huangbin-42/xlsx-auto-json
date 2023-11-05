@@ -1,5 +1,7 @@
+import fs from 'fs'
 import { loadConfig } from "unconfig"
 import { XlsxAutoJsonConfigProps } from "./@types";
+import { getTranslateMap } from "./utils/index.js";
 
 (async () => {
     const { config } = await loadConfig<XlsxAutoJsonConfigProps>({
@@ -11,5 +13,8 @@ import { XlsxAutoJsonConfigProps } from "./@types";
         ]
     })
 
-    console.log('config===>', config);
+    const translateMap = getTranslateMap(config)
+
+    console.log(Array.from(translateMap[0].map));
+
 })()

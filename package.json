@@ -19,14 +19,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf dist && npx tsc -p .",
-    "run:test":"rm -rf dist && npx tsc -p . && npm link && pnpm translate",
+    "run:test": "rm -rf dist && npx tsc -p . && npm link && pnpm translate",
     "translate": "translate"
   },
-  "files": [
-    "dist",
-    "dist/utils",
-    "dist/utils/tools"
-  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -47,10 +42,24 @@
   "keywords": [
     "translate"
   ],
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "dist/utils",
+    "dist/utils/tools"
+  ],
   "bin": {
     "translate": "bin/translate.js"
   },
   "devDependencies": {
+    "@types/node": "^20.8.10",
     "typescript": "^5.2.2"
   },
   "dependencies": {
