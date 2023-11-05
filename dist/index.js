@@ -35,9 +35,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { loadConfig } from "unconfig";
-import { getTranslateMap } from "./utils/index.js";
+import { getTranslateMap, getXlsx } from "./utils/index.js";
 (function () { return __awaiter(void 0, void 0, void 0, function () {
-    var config, translateMap;
+    var config, translateMap, xlsx;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, loadConfig({
@@ -51,7 +51,8 @@ import { getTranslateMap } from "./utils/index.js";
             case 1:
                 config = (_a.sent()).config;
                 translateMap = getTranslateMap(config);
-                console.log(Array.from(translateMap[0].map));
+                xlsx = getXlsx(config.fromXlsxPath);
+                console.log(xlsx);
                 return [2 /*return*/];
         }
     });

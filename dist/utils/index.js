@@ -60,30 +60,6 @@ export var getXlsx = function (path) {
     var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
     return jsonData;
 };
-export var getJson = function (path) { return __awaiter(void 0, void 0, void 0, function () {
-    var jsonData;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                jsonData = {};
-                return [4 /*yield*/, fs.readFile(path !== null && path !== void 0 ? path : '/', 'utf8', function (err, data) {
-                        if (err) {
-                            console.error("Error reading JSON file: ".concat(err));
-                            return;
-                        }
-                        try {
-                            jsonData = JSON.parse(data);
-                        }
-                        catch (parseError) {
-                            console.error("Error parsing JSON data: ".concat(parseError));
-                        }
-                    })];
-            case 1:
-                _a.sent();
-                return [2 /*return*/, jsonData];
-        }
-    });
-}); };
 /**
  * 获取已有翻译json
  * @param config
@@ -104,7 +80,7 @@ export var getTranslateMap = function (config) {
                 });
             }
             catch (error) {
-                console.error('读取 JSON 文件时出错：', error);
+                console.error('Read JSON Error:', error);
             }
             return [2 /*return*/];
         });
