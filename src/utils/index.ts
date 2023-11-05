@@ -95,7 +95,7 @@ export class TranslateItem {
         config.forEach(lang => {
             const value = valueList[lang.targetIndex]
             keyList.forEach((key, index) => {
-                lang.map.set(`${this._initKey}${toCamelCaseFromSpace(key)}`, value?.[index] ?? defaultList?.[index])
+                lang.map.set(`${this._initKey}${toCamelCaseFromSpace(key)}`.trim(), value?.[index] ?? defaultList?.[index])
             })
         })
     }

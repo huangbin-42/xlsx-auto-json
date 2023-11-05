@@ -131,7 +131,7 @@ var TranslateItem = /** @class */ (function () {
             var value = valueList[lang.targetIndex];
             keyList.forEach(function (key, index) {
                 var _a;
-                lang.map.set("".concat(_this._initKey).concat(toCamelCaseFromSpace(key)), (_a = value === null || value === void 0 ? void 0 : value[index]) !== null && _a !== void 0 ? _a : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index]);
+                lang.map.set("".concat(_this._initKey).concat(toCamelCaseFromSpace(key)).trim(), (_a = value === null || value === void 0 ? void 0 : value[index]) !== null && _a !== void 0 ? _a : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index]);
             });
         });
     };
