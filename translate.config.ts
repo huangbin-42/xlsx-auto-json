@@ -1,31 +1,31 @@
 import { defineConfig } from './src/utils/tools';
 
 const config = defineConfig({
-    noFoundTest:'***noFoundTest***',
+    noFoundTest: '***noFoundTest***',
     initKey: 'Language.Demo.',
     contrastLangIndex: 1,
     defaultValueIndex: 1,
-    fromXlsxPath: '/Users/a605/Desktop/xlsx-auto-json/example/demo/价格竞猜活动改版 页面文案.xlsx',
+    fromXlsxPath: 'path',
     translate: [
         {
             targetLang: 'zh',
             targetIndex: 1,
-            outPath: `/Users/a605/Desktop/xlsx-auto-json/example/locales/lang_zh.json`,
+            outPath: 'path',
         },
         {
             targetLang: 'tw',
             targetIndex: 2,
-            outPath: `/Users/a605/Desktop/xlsx-auto-json/example/locales/lang_tw.json`,
+            outPath: 'path',
         },
         {
             targetLang: 'en',
             targetIndex: 3,
-            outPath: `/Users/a605/Desktop/xlsx-auto-json/example/locales/lang_en.json`,
+            outPath: 'path',
         },
         {
             targetLang: 'ja',
             targetIndex: 4,
-            outPath: `/Users/a605/Desktop/xlsx-auto-json/example/locales/lang_ja.json`,
+            outPath: 'path',
         },
     ],
 })

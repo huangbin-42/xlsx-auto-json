@@ -61,12 +61,11 @@ import { filterArray } from './utils/tools.js';
                 xlsx.forEach(function (item, index) {
                     translateItem.createLangMap(item, translateMap);
                 });
-                // console.log(translateMap); 
                 translateMap.forEach(function (translate) {
                     var list = Array.from(translate.map);
                     var text = list.map(function (_a, index) {
                         var key = _a[0], value = _a[1];
-                        return "    \"".concat(key, "\" : \"").concat(value !== null && value !== void 0 ? value : 'no found', "\"").concat(index === ((list === null || list === void 0 ? void 0 : list.length) - 1) ? '' : ',');
+                        return "    \"".concat(key, "\" : \"").concat(value !== null && value !== void 0 ? value : config.noFoundTest, "\"").concat(index === ((list === null || list === void 0 ? void 0 : list.length) - 1) ? '' : ',');
                     }).join('\n');
                     writeFile(translate.outPath, "{\n".concat(text, "\n}"), translate.targetLang);
                 });

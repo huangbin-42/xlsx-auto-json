@@ -15,4 +15,9 @@ export interface XlsxAutoJsonConfigProps {
         /** 导出文件路径 */
         outPath: string;
     }[];
+    /**
+     * 未找到文案切默认替换文案也没有的标识
+     * 方便你在文案中找到它
+     */
+    noFoundTest?: string;
 }
