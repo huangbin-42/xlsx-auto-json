@@ -35,9 +35,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { loadConfig } from "unconfig";
-import { getTranslateMap, getXlsx } from "./utils/index.js";
+import { TranslateItem, getTranslateMap, getXlsx, writeFile } from "./utils/index.js";
+import { filterArray } from './utils/tools.js';
 (function () { return __awaiter(void 0, void 0, void 0, function () {
-    var config, translateMap, xlsx;
+    var config, xlsx, translateMap, translateItem;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, loadConfig({
@@ -50,9 +51,25 @@ import { getTranslateMap, getXlsx } from "./utils/index.js";
                 })];
             case 1:
                 config = (_a.sent()).config;
+                xlsx = filterArray(getXlsx(config.fromXlsxPath));
                 translateMap = getTranslateMap(config);
-                xlsx = getXlsx(config.fromXlsxPath);
-                console.log(xlsx);
+                translateItem = new TranslateItem({
+                    initKey: config.initKey,
+                    contrastLangIndex: config.contrastLangIndex,
+                    defaultValueIndex: config.defaultValueIndex,
+                });
+                xlsx.forEach(function (item, index) {
+                    translateItem.createLangMap(item, translateMap);
+                });
+                // console.log(translateMap); 
+                translateMap.forEach(function (translate) {
+                    var list = Array.from(translate.map);
+                    var text = list.map(function (_a, index) {
+                        var key = _a[0], value = _a[1];
+                        return "    \"".concat(key, "\" : \"").concat(value !== null && value !== void 0 ? value : 'no found', "\"").concat(index === ((list === null || list === void 0 ? void 0 : list.length) - 1) ? '' : ',');
+                    }).join('\n');
+                    writeFile(translate.outPath, "{\n".concat(text, "\n}"), translate.targetLang);
+                });
                 return [2 /*return*/];
         }
     });

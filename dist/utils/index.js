@@ -45,6 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+import { toCamelCaseFromSpace } from "../utils/tools.js";
 import XLSX from 'xlsx';
 import fs from 'fs';
 /**
@@ -87,3 +88,53 @@ export var getTranslateMap = function (config) {
     }); });
     return translateMap;
 };
+/**
+ * 使用fs生成文件
+ * @param {fs.PathOrFileDescriptor} url
+ * @param {(string | NodeJS.ArrayBufferView)} text
+ * @param {Lang} lang
+ */
+export var writeFile = function (url, text, lang) {
+    fs.writeFile(url, text, function (err) {
+        if (err) {
+            console.error('Error writing file:===>', err);
+        }
+        else {
+            if (lang) {
+                console.log("".concat(lang, " \u7FFB\u8BD1\u5B8C\u6210====>"));
+            }
+        }
+    });
+};
+var TranslateItem = /** @class */ (function () {
+    function TranslateItem(props) {
+        this._initKey = props === null || props === void 0 ? void 0 : props.initKey;
+        this._contrastLangIndex = props.contrastLangIndex;
+        this._defaultValueIndex = props.defaultValueIndex;
+    }
+    /**
+     * 分隔字符串
+     * @param text
+     * @param reg
+     * @returns
+     */
+    TranslateItem.prototype._strToMap = function (text, reg) {
+        if (reg === void 0) { reg = /\n+|\s{2,}/; }
+        return text.split(reg);
+    };
+    TranslateItem.prototype.createLangMap = function (item, config) {
+        var _this = this;
+        var valueList = item === null || item === void 0 ? void 0 : item.map(function (str) { return _this._strToMap(str); });
+        var keyList = valueList[this._contrastLangIndex];
+        var defaultList = valueList[this._defaultValueIndex];
+        config.forEach(function (lang) {
+            var value = valueList[lang.targetIndex];
+            keyList.forEach(function (key, index) {
+                var _a;
+                lang.map.set("".concat(_this._initKey).concat(toCamelCaseFromSpace(key)), (_a = value === null || value === void 0 ? void 0 : value[index]) !== null && _a !== void 0 ? _a : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index]);
+            });
+        });
+    };
+    return TranslateItem;
+}());
+export { TranslateItem };

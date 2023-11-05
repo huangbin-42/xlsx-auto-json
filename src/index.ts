@@ -1,7 +1,8 @@
 import fs from 'fs'
 import { loadConfig } from "unconfig"
 import { XlsxAutoJsonConfigProps } from "./@types";
-import { getTranslateMap, getXlsx } from "./utils/index.js";
+import { TranslateItem, getTranslateMap, getXlsx, writeFile } from "./utils/index.js";
+import { escapeSpecialChars, filterArray } from './utils/tools.js';
 
 (async () => {
     const { config } = await loadConfig<XlsxAutoJsonConfigProps>({
@@ -12,10 +13,25 @@ import { getTranslateMap, getXlsx } from "./utils/index.js";
             }
         ]
     })
-    
-    const xlsx = getXlsx(config.fromXlsxPath)
+
+    const xlsx = filterArray(getXlsx(config.fromXlsxPath))
     const translateMap = getTranslateMap(config)
 
-    
-    // console.log(Array.from(translateMap[0].map));
+    const translateItem = new TranslateItem({
+        initKey: config.initKey,
+        contrastLangIndex: config.contrastLangIndex,
+        defaultValueIndex: config.defaultValueIndex,
+    })
+
+    xlsx.forEach((item, index) => {
+        translateItem.createLangMap(item, translateMap)
+    })
+
+
+    translateMap.forEach(translate => {
+        const list = Array.from(translate.map)
+        const text = list.map(([key, value], index) => `    "${key}" : "${value ?? config.noFoundTest}"${index === (list?.length - 1) ? '' : ','}`).join('\n')
+
+        writeFile(translate.outPath, `{\n${text}\n}`, translate.targetLang)
+    })
 })()

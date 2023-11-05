@@ -1,4 +1,5 @@
 import { XlsxAutoJsonConfigProps } from "../@types"
+import { toCamelCaseFromSpace } from "../utils/tools.js";
 import XLSX from 'xlsx';
 import fs from 'fs';
 
@@ -45,5 +46,58 @@ export const getTranslateMap = (config: XlsxAutoJsonConfigProps) => {
     })
 
     return translateMap
+}
+
+/**
+ * 使用fs生成文件
+ * @param {fs.PathOrFileDescriptor} url
+ * @param {(string | NodeJS.ArrayBufferView)} text
+ * @param {Lang} lang
+ */
+export const writeFile = (url: fs.PathOrFileDescriptor, text: string | NodeJS.ArrayBufferView, lang?: string) => {
+    fs.writeFile(url, text, (err) => {
+        if (err) {
+            console.error('Error writing file:===>', err);
+        } else {
+            if (lang) {
+                console.log(`${lang} 翻译完成====>`);
+            }
+        }
+    });
+}
+
+export class TranslateItem {
+    private _contrastLangIndex: number
+    private _defaultValueIndex: number
+    private _initKey?: string
+
+    constructor(props: Pick<XlsxAutoJsonConfigProps, 'contrastLangIndex' | 'defaultValueIndex' | 'initKey'>) {
+        this._initKey = props?.initKey
+        this._contrastLangIndex = props.contrastLangIndex
+        this._defaultValueIndex = props.defaultValueIndex
+    }
+
+    /**
+     * 分隔字符串
+     * @param text 
+     * @param reg 
+     * @returns 
+     */
+    private _strToMap(text: string, reg = /\n+|\s{2,}/) {
+        return text.split(reg)
+    }
+
+    public createLangMap(item: any[], config: ReturnType<typeof getTranslateMap>) {
+        const valueList = item?.map(str => this._strToMap(str))
+        const keyList = valueList[this._contrastLangIndex]
+        const defaultList = valueList[this._defaultValueIndex]
+
+        config.forEach(lang => {
+            const value = valueList[lang.targetIndex]
+            keyList.forEach((key, index) => {
+                lang.map.set(`${this._initKey}${toCamelCaseFromSpace(key)}`, value?.[index] ?? defaultList?.[index])
+            })
+        })
+    }
 }
 

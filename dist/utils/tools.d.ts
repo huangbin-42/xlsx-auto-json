@@ -11,3 +11,15 @@ export declare const defineConfig: (config: XlsxAutoJsonConfigProps) => XlsxAuto
  * @returns
  */
 export declare const escapeSpecialChars: (str: string) => string;
+/**
+ * 去除空数组
+ * @param array
+ * @returns
+ */
+export declare const filterArray: (array: any[]) => any[];
+/**
+ * 转换为首字母大写并去除空格key
+ * @param str
+ * @returns
+ */
+export declare function toCamelCaseFromSpace(str: string): string;
