@@ -68,6 +68,13 @@ const config = {
 export default config
 ```
 
+在 `package.json` 中加入 scripts 命令
+
+```json
+"scripts": {
+  "translate": "translate"
+}
+```
 
 在终端执行命令启动翻译
 
