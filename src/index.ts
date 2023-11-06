@@ -29,7 +29,7 @@ import { escapeSpecialChars, filterArray } from './utils/tools.js';
 
     translateMap.forEach(translate => {
         const list = Array.from(translate.map)
-        const text = list.map(([key, value], index) => `    "${key}" : "${value ?? config.noFoundTest}"${index === (list?.length - 1) ? '' : ','}`).join('\n')
+        const text = list.map(([key, value], index) => `    "${key}": "${value ?? config.noFoundTest}"${index === (list?.length - 1) ? '' : ','}`).join('\n')
 
         writeFile(translate.outPath, `{\n${text}\n}`, translate.targetLang)
     })
