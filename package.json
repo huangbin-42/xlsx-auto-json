@@ -1,6 +1,6 @@
 {
   "name": "xlsx-auto-json",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "Quickly import xlsx copy, you deserve it",
   "main": "index.js",
   "type": "module",

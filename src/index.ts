@@ -27,7 +27,6 @@ import { escapeSpecialChars, filterArray } from './utils/tools.js';
         translateItem.createLangMap(item, translateMap)
     })
 
-
     translateMap.forEach(translate => {
         const list = Array.from(translate.map)
         const text = list.map(([key, value], index) => `    "${key}" : "${value ?? config.noFoundTest}"${index === (list?.length - 1) ? '' : ','}`).join('\n')
