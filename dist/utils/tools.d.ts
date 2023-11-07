@@ -23,3 +23,9 @@ export declare const filterArray: (array: any[]) => any[];
  * @returns
  */
 export declare function toCamelCaseFromSpace(str: string): string;
+/**
+ * 使用正则表达式去除多余的回车
+ * @param input
+ * @returns
+ */
+export declare function removeExtraLineBreaks(input: string): string;

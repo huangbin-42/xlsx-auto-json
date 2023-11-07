@@ -1,5 +1,5 @@
 import { XlsxAutoJsonConfigProps } from "../@types"
-import { toCamelCaseFromSpace } from "../utils/tools.js";
+import { toCamelCaseFromSpace, escapeSpecialChars, removeExtraLineBreaks } from "../utils/tools.js";
 import XLSX from 'xlsx';
 import fs from 'fs';
 
@@ -95,7 +95,7 @@ export class TranslateItem {
         config.forEach(lang => {
             const value = valueList[lang.targetIndex]
             keyList.forEach((key, index) => {
-                lang.map.set(`${this._initKey}${toCamelCaseFromSpace(key)}`.trim(), value?.[index] ?? defaultList?.[index])
+                lang.map.set(removeExtraLineBreaks(escapeSpecialChars(`${this._initKey}${toCamelCaseFromSpace(key)}`.trim())), removeExtraLineBreaks(escapeSpecialChars(value?.[index] ?? defaultList?.[index]).trim()))
             })
         })
     }

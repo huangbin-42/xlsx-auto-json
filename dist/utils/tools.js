@@ -28,3 +28,11 @@ export var filterArray = function (array) {
 export function toCamelCaseFromSpace(str) {
     return str.replace(/\s(.)/g, function (_, c) { return c.toUpperCase(); });
 }
+/**
+ * 使用正则表达式去除多余的回车
+ * @param input
+ * @returns
+ */
+export function removeExtraLineBreaks(input) {
+    return input.replace(/(\r\n|\n|\r)+/g, '\n');
+}

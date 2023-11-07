@@ -33,3 +33,12 @@ export const filterArray = (array: any[]) => {
 export function toCamelCaseFromSpace(str: string) {
     return str.replace(/\s(.)/g, (_, c) => c.toUpperCase());
 }
+
+/**
+ * 使用正则表达式去除多余的回车
+ * @param input 
+ * @returns 
+ */
+export function removeExtraLineBreaks(input: string): string {
+    return input.replace(/(\r\n|\n|\r)+/g, '\n');
+}
