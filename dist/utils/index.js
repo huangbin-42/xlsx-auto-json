@@ -74,7 +74,7 @@ export var getTranslateMap = function (config) {
         return __generator(this, function (_a) {
             try {
                 jsonData = fs.readFileSync(item.outPath, 'utf8');
-                json = JSON.parse(jsonData);
+                json = JSON.parse(jsonData !== null && jsonData !== void 0 ? jsonData : '{}');
                 Object.entries(json).forEach(function (_a) {
                     var key = _a[0], value = _a[1];
                     translateMap[index].map.set(key, value);

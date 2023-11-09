@@ -34,7 +34,7 @@ export const getTranslateMap = (config: XlsxAutoJsonConfigProps) => {
     translateMap.forEach(async (item, index) => {
         try {
             const jsonData = fs.readFileSync(item.outPath, 'utf8');
-            const json = JSON.parse(jsonData);
+            const json = JSON.parse(jsonData ?? '{}');
 
             Object.entries(json).forEach(([key, value]) => {
                 translateMap[index].map.set(key, value)

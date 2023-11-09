@@ -13,7 +13,7 @@ export const defineConfig = (config: XlsxAutoJsonConfigProps) => config
  * @returns 
  */
 export const escapeSpecialChars = (str: string): string => {
-    return str.replace(/"/g, '\\"');
+    return `${str}`.replace(/"/g, '\\"');
 }
 
 /**
