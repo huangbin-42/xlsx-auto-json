@@ -3,8 +3,6 @@ import { toCamelCaseFromSpace, escapeSpecialChars, removeExtraLineBreaks } from 
 import XLSX from 'xlsx';
 import fs from 'fs';
 
-
-
 /**
  * 获取xlsx数据
  * @param fromXlsxPath 
@@ -89,12 +87,12 @@ export class TranslateItem {
 
     public createLangMap(item: any[], config: ReturnType<typeof getTranslateMap>) {
         const valueList = item?.map(str => this._strToMap(str))
-        const keyList = valueList[this._contrastLangIndex]
+        const keyList = valueList[this._contrastLangIndex]??[]
         const defaultList = valueList[this._defaultValueIndex]
 
         config.forEach(lang => {
             const value = valueList[lang.targetIndex]
-            keyList.forEach((key, index) => {
+            keyList?.forEach((key, index) => {
                 lang.map.set(removeExtraLineBreaks(escapeSpecialChars(`${this._initKey}${toCamelCaseFromSpace(key)}`.trim())), removeExtraLineBreaks(escapeSpecialChars(value?.[index] ?? defaultList?.[index]).trim()))
             })
         })
