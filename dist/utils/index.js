@@ -124,12 +124,13 @@ var TranslateItem = /** @class */ (function () {
     };
     TranslateItem.prototype.createLangMap = function (item, config) {
         var _this = this;
+        var _a;
         var valueList = item === null || item === void 0 ? void 0 : item.map(function (str) { return _this._strToMap(str); });
-        var keyList = valueList[this._contrastLangIndex];
+        var keyList = (_a = valueList[this._contrastLangIndex]) !== null && _a !== void 0 ? _a : [];
         var defaultList = valueList[this._defaultValueIndex];
         config.forEach(function (lang) {
             var value = valueList[lang.targetIndex];
-            keyList.forEach(function (key, index) {
+            keyList === null || keyList === void 0 ? void 0 : keyList.forEach(function (key, index) {
                 var _a;
                 lang.map.set(removeExtraLineBreaks(escapeSpecialChars("".concat(_this._initKey).concat(toCamelCaseFromSpace(key)).trim())), removeExtraLineBreaks(escapeSpecialChars((_a = value === null || value === void 0 ? void 0 : value[index]) !== null && _a !== void 0 ? _a : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index]).trim()));
             });
