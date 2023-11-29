@@ -82,7 +82,7 @@ export class TranslateItem {
      * @returns 
      */
     private _strToMap(text: string, reg = /\n+|\s{2,}/) {
-        return text.split(reg)
+        return String(text)?.split(reg)
     }
 
     public createLangMap(item: any[], config: ReturnType<typeof getTranslateMap>) {

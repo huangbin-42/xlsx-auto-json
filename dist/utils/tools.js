@@ -10,7 +10,9 @@ export var defineConfig = function (config) { return config; };
  * @returns
  */
 export var escapeSpecialChars = function (str) {
-    return "".concat(str).replace(/"/g, '\\"');
+    var specialCharacters = /[-\/\\^$*+?.()|[\]{}"]/g;
+    var result = str.replace(specialCharacters, "\\$&");
+    return result;
 };
 /**
  * 去除空数组

@@ -119,8 +119,9 @@ var TranslateItem = /** @class */ (function () {
      * @returns
      */
     TranslateItem.prototype._strToMap = function (text, reg) {
+        var _a;
         if (reg === void 0) { reg = /\n+|\s{2,}/; }
-        return text.split(reg);
+        return (_a = String(text)) === null || _a === void 0 ? void 0 : _a.split(reg);
     };
     TranslateItem.prototype.createLangMap = function (item, config) {
         var _this = this;
