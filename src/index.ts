@@ -31,10 +31,9 @@ import { escapeSpecialChars, filterArray } from './utils/tools.js';
         const list = Array.from(translate.map)
 
         const text = list.map(([key, value], index) => {
-
-            console.log('======>', typeof value, (value ?? 'undefined') === 'undefined');
-
-
+            if(typeof value === 'undefined'){
+                console.log(`${translate.targetLang}: ${key} ==== undefined`);
+            }
             return `  "${key}": "${typeof value === 'undefined' ? config.noFoundTest : value}"${index === (list?.length - 1) ? '' : ','}`
         }).join('\n')
 
