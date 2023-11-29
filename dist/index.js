@@ -65,7 +65,8 @@ import { filterArray } from './utils/tools.js';
                     var list = Array.from(translate.map);
                     var text = list.map(function (_a, index) {
                         var key = _a[0], value = _a[1];
-                        return "  \"".concat(key, "\": \"").concat(value === 'undefined' ? config.noFoundTest : value, "\"").concat(index === ((list === null || list === void 0 ? void 0 : list.length) - 1) ? '' : ',');
+                        console.log('======>', typeof value, (value !== null && value !== void 0 ? value : 'undefined') === 'undefined');
+                        return "  \"".concat(key, "\": \"").concat(typeof value === 'undefined' ? config.noFoundTest : value, "\"").concat(index === ((list === null || list === void 0 ? void 0 : list.length) - 1) ? '' : ',');
                     }).join('\n');
                     writeFile(translate.outPath, "{\n".concat(text, "\n}"), translate.targetLang);
                 });
