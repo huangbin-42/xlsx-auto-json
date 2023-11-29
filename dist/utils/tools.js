@@ -14,6 +14,11 @@ export var escapeSpecialChars = function (str) {
     var result = str === null || str === void 0 ? void 0 : str.replace(specialCharacters, "\\$&");
     return result;
 };
+export var removeSpecialChars = function (str) {
+    var specialCharacters = /[-\/\\^$*+?.():|[\]{}]/g;
+    var result = str === null || str === void 0 ? void 0 : str.replace(specialCharacters, "\\$&");
+    return result;
+};
 /**
  * 去除空数组
  * @param array

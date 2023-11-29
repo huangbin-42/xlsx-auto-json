@@ -11,6 +11,7 @@ export declare const defineConfig: (config: XlsxAutoJsonConfigProps) => XlsxAuto
  * @returns
  */
 export declare const escapeSpecialChars: (str: string) => string;
+export declare const removeSpecialChars: (str: string) => string;
 /**
  * 去除空数组
  * @param array
