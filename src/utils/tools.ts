@@ -20,7 +20,7 @@ export const escapeSpecialChars = (str: string): string => {
 
 export const removeSpecialChars = (str: string): string => {
     const specialCharacters = /[-\/\\^$*+?.():|[\]{}]/g;
-    const result = str?.replace(specialCharacters, "\\$&");
+    const result = str?.replace(specialCharacters, "");
     return result;
 }
 

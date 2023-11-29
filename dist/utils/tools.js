@@ -16,7 +16,7 @@ export var escapeSpecialChars = function (str) {
 };
 export var removeSpecialChars = function (str) {
     var specialCharacters = /[-\/\\^$*+?.():|[\]{}]/g;
-    var result = str === null || str === void 0 ? void 0 : str.replace(specialCharacters, "\\$&");
+    var result = str === null || str === void 0 ? void 0 : str.replace(specialCharacters, "");
     return result;
 };
 /**
