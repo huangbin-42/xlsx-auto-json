@@ -132,8 +132,8 @@ var TranslateItem = /** @class */ (function () {
         config.forEach(function (lang) {
             var value = valueList[lang.targetIndex];
             keyList === null || keyList === void 0 ? void 0 : keyList.forEach(function (key, index) {
-                var _a;
-                lang.map.set(removeExtraLineBreaks(escapeSpecialChars("".concat(_this._initKey).concat(toCamelCaseFromSpace(key)).trim())), removeExtraLineBreaks(escapeSpecialChars((_a = value === null || value === void 0 ? void 0 : value[index]) !== null && _a !== void 0 ? _a : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index]).trim()));
+                var _a, _b, _c;
+                lang.map.set(removeExtraLineBreaks(escapeSpecialChars((_a = "".concat(_this._initKey).concat(toCamelCaseFromSpace(key))) === null || _a === void 0 ? void 0 : _a.trim())), removeExtraLineBreaks((_c = escapeSpecialChars((_b = value === null || value === void 0 ? void 0 : value[index]) !== null && _b !== void 0 ? _b : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index])) === null || _c === void 0 ? void 0 : _c.trim()));
             });
         });
     };

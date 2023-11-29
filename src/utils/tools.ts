@@ -13,8 +13,8 @@ export const defineConfig = (config: XlsxAutoJsonConfigProps) => config
  * @returns 
  */
 export const escapeSpecialChars = (str: string): string => {
-    const specialCharacters = /[-\/\\^$*+?.()|[\]{}"]/g;
-    const result = str.replace(specialCharacters, "\\$&");
+    const specialCharacters = /[\\^$*+?()|[\]:"]/g;    
+    const result = str?.replace(specialCharacters, "\\$&");
     return result;
 }
 
@@ -24,7 +24,7 @@ export const escapeSpecialChars = (str: string): string => {
  * @returns 
  */
 export const filterArray = (array: any[]) => {
-    return array.filter((item) => Array.isArray(item) && item.length > 0)
+    return array?.filter((item) => Array.isArray(item) && item.length > 0)
 }
 
 /**
@@ -33,7 +33,7 @@ export const filterArray = (array: any[]) => {
  * @returns 
  */
 export function toCamelCaseFromSpace(str: string) {
-    return str.replace(/\s(.)/g, (_, c) => c.toUpperCase());
+    return str?.replace(/\s(.)/g, (_, c) => c.toUpperCase());
 }
 
 /**
@@ -42,5 +42,5 @@ export function toCamelCaseFromSpace(str: string) {
  * @returns 
  */
 export function removeExtraLineBreaks(input: string): string {
-    return input.replace(/(\r\n|\n|\r)+/g, '\n');
+    return input?.replace(/(\r\n|\n|\r)+/g, '\n');
 }

@@ -93,7 +93,7 @@ export class TranslateItem {
         config.forEach(lang => {
             const value = valueList[lang.targetIndex]
             keyList?.forEach((key, index) => {
-                lang.map.set(removeExtraLineBreaks(escapeSpecialChars(`${this._initKey}${toCamelCaseFromSpace(key)}`.trim())), removeExtraLineBreaks(escapeSpecialChars(value?.[index] ?? defaultList?.[index]).trim()))
+                lang.map.set(removeExtraLineBreaks(escapeSpecialChars(`${this._initKey}${toCamelCaseFromSpace(key)}`?.trim())), removeExtraLineBreaks(escapeSpecialChars(value?.[index] ?? defaultList?.[index])?.trim()))
             })
         })
     }
