@@ -27,8 +27,6 @@ export const getXlsx = (path: string): any[] => {
         allData = allData.concat(sheetData);
     });
 
-    console.log(allData);
-
     return allData;
 }
 
@@ -108,7 +106,7 @@ export class TranslateItem {
             const value = valueList[lang.targetIndex]
             keyList?.forEach((key, index) => {
                 lang.map.set(removeSpecialChars(removeExtraLineBreaks(`${this._initKey}${key}`?.trim())),
-                    processString(`${value?.[index] ?? defaultList?.[index]}`)?.trim())
+                    processString(value?.[index] ?? defaultList?.[index])?.trim())
             })
         })
     }

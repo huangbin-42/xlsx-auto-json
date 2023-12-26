@@ -62,7 +62,7 @@ export function removeExtraLineBreaks(input: string): string {
  */
 export const processString = (inputString: string): string => {
     // 添加转义字符
-    const stringWithEscapedChars = inputString.replace(/(["{}])/g, '\\$1');
+    const stringWithEscapedChars = inputString?.replace(/(["{}])/g, '\\$1');
 
     // 去除多余的回车
     const stringWithoutExtraLineBreaks = stringWithEscapedChars?.replace(/(\r\n|\n|\r)+/g, '\n');

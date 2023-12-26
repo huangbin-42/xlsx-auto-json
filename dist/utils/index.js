@@ -67,7 +67,6 @@ export var getXlsx = function (path) {
         // 将每个工作表的数据添加到数组中
         allData = allData.concat(sheetData);
     });
-    console.log(allData);
     return allData;
 };
 /**
@@ -142,7 +141,7 @@ var TranslateItem = /** @class */ (function () {
             var value = valueList[lang.targetIndex];
             keyList === null || keyList === void 0 ? void 0 : keyList.forEach(function (key, index) {
                 var _a, _b, _c;
-                lang.map.set(removeSpecialChars(removeExtraLineBreaks((_a = "".concat(_this._initKey).concat(key)) === null || _a === void 0 ? void 0 : _a.trim())), (_c = processString("".concat((_b = value === null || value === void 0 ? void 0 : value[index]) !== null && _b !== void 0 ? _b : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index]))) === null || _c === void 0 ? void 0 : _c.trim());
+                lang.map.set(removeSpecialChars(removeExtraLineBreaks((_a = "".concat(_this._initKey).concat(key)) === null || _a === void 0 ? void 0 : _a.trim())), (_c = processString((_b = value === null || value === void 0 ? void 0 : value[index]) !== null && _b !== void 0 ? _b : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index])) === null || _c === void 0 ? void 0 : _c.trim());
             });
         });
     };
