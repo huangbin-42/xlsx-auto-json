@@ -1,5 +1,5 @@
 import { XlsxAutoJsonConfigProps } from "../@types"
-import { toCamelCaseFromSpace, escapeSpecialChars, removeExtraLineBreaks, removeSpecialChars } from "../utils/tools.js";
+import { toCamelCaseFromSpace, escapeSpecialChars, removeExtraLineBreaks, removeSpecialChars, processString } from "../utils/tools.js";
 import XLSX from 'xlsx';
 import fs from 'fs';
 
@@ -10,12 +10,26 @@ import fs from 'fs';
  */
 export const getXlsx = (path: string): any[] => {
     const workbook = XLSX.readFile(path ?? '/');
-    // 获取第一个工作表
-    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-    // 将工作表转换为JSON对象
-    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+    let allData: any[] = [];
 
-    return jsonData
+    console.log(workbook.SheetNames);
+
+    // 遍历所有工作表
+    workbook.SheetNames.forEach(sheetName => {
+        // 获取每个工作表
+        const worksheet = workbook.Sheets[sheetName];
+
+        // 将工作表转换为 JSON 对象
+        const sheetData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+        console.log('sheetData==>', sheetData);
+
+        // 将每个工作表的数据添加到数组中
+        allData = allData.concat(sheetData);
+    });
+
+    console.log(allData);
+
+    return allData;
 }
 
 /**
@@ -93,8 +107,8 @@ export class TranslateItem {
         config.forEach(lang => {
             const value = valueList[lang.targetIndex]
             keyList?.forEach((key, index) => {
-                lang.map.set(removeExtraLineBreaks(removeSpecialChars(`${this._initKey}${key}`?.trim())),
-                    removeExtraLineBreaks(escapeSpecialChars(`${value?.[index] ?? defaultList?.[index]}`)?.trim()))
+                lang.map.set(removeSpecialChars(removeExtraLineBreaks(`${this._initKey}${key}`?.trim())),
+                    processString(`${value?.[index] ?? defaultList?.[index]}`)?.trim())
             })
         })
     }

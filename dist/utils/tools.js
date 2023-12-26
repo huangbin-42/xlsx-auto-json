@@ -46,3 +46,15 @@ export function toCamelCaseFromSpace(str) {
 export function removeExtraLineBreaks(input) {
     return input === null || input === void 0 ? void 0 : input.replace(/(\r\n|\n|\r)+/g, '\n');
 }
+/**
+ * 处理字符串，添加转义字符并去除多余的回车
+ * @param str 输入字符串
+ * @returns 处理后的字符串
+ */
+export var processString = function (inputString) {
+    // 添加转义字符
+    var stringWithEscapedChars = inputString.replace(/(["{}])/g, '\\$1');
+    // 去除多余的回车
+    var stringWithoutExtraLineBreaks = stringWithEscapedChars === null || stringWithEscapedChars === void 0 ? void 0 : stringWithEscapedChars.replace(/(\r\n|\n|\r)+/g, '\n');
+    return stringWithoutExtraLineBreaks;
+};

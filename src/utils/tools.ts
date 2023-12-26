@@ -54,3 +54,18 @@ export function toCamelCaseFromSpace(str: string) {
 export function removeExtraLineBreaks(input: string): string {
     return input?.replace(/(\r\n|\n|\r)+/g, '\n');
 }
+
+/**
+ * 处理字符串，添加转义字符并去除多余的回车
+ * @param str 输入字符串
+ * @returns 处理后的字符串
+ */
+export const processString = (inputString: string): string => {
+    // 添加转义字符
+    const stringWithEscapedChars = inputString.replace(/(["{}])/g, '\\$1');
+
+    // 去除多余的回车
+    const stringWithoutExtraLineBreaks = stringWithEscapedChars?.replace(/(\r\n|\n|\r)+/g, '\n');
+
+    return stringWithoutExtraLineBreaks;
+};

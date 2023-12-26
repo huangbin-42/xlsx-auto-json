@@ -35,3 +35,9 @@ export declare function toCamelCaseFromSpace(str: string): string;
  * @returns
  */
 export declare function removeExtraLineBreaks(input: string): string;
+/**
+ * 处理字符串，添加转义字符并去除多余的回车
+ * @param str 输入字符串
+ * @returns 处理后的字符串
+ */
+export declare const processString: (inputString: string) => string;
