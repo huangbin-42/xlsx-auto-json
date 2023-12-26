@@ -87,13 +87,14 @@ export class TranslateItem {
 
     public createLangMap(item: any[], config: ReturnType<typeof getTranslateMap>) {
         const valueList = item?.map(str => this._strToMap(str))
-        const keyList = valueList[this._contrastLangIndex]??[]
+        const keyList = valueList[this._contrastLangIndex] ?? []
         const defaultList = valueList[this._defaultValueIndex]
 
         config.forEach(lang => {
             const value = valueList[lang.targetIndex]
             keyList?.forEach((key, index) => {
-                lang.map.set(removeExtraLineBreaks(removeSpecialChars(`${this._initKey}${toCamelCaseFromSpace(key)}`?.trim())), removeExtraLineBreaks(escapeSpecialChars(value?.[index] ?? defaultList?.[index])?.trim()))
+                lang.map.set(removeExtraLineBreaks(removeSpecialChars(`${this._initKey}${key}`?.trim())),
+                    removeExtraLineBreaks(escapeSpecialChars(`${value?.[index] ?? defaultList?.[index]}`)?.trim()))
             })
         })
     }

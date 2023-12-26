@@ -45,7 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { toCamelCaseFromSpace, escapeSpecialChars, removeExtraLineBreaks, removeSpecialChars } from "../utils/tools.js";
+import { escapeSpecialChars, removeExtraLineBreaks, removeSpecialChars } from "../utils/tools.js";
 import XLSX from 'xlsx';
 import fs from 'fs';
 /**
@@ -133,7 +133,7 @@ var TranslateItem = /** @class */ (function () {
             var value = valueList[lang.targetIndex];
             keyList === null || keyList === void 0 ? void 0 : keyList.forEach(function (key, index) {
                 var _a, _b, _c;
-                lang.map.set(removeExtraLineBreaks(removeSpecialChars((_a = "".concat(_this._initKey).concat(toCamelCaseFromSpace(key))) === null || _a === void 0 ? void 0 : _a.trim())), removeExtraLineBreaks((_c = escapeSpecialChars((_b = value === null || value === void 0 ? void 0 : value[index]) !== null && _b !== void 0 ? _b : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index])) === null || _c === void 0 ? void 0 : _c.trim()));
+                lang.map.set(removeExtraLineBreaks(removeSpecialChars((_a = "".concat(_this._initKey).concat(key)) === null || _a === void 0 ? void 0 : _a.trim())), removeExtraLineBreaks((_c = escapeSpecialChars("".concat((_b = value === null || value === void 0 ? void 0 : value[index]) !== null && _b !== void 0 ? _b : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index]))) === null || _c === void 0 ? void 0 : _c.trim()));
             });
         });
     };

@@ -12,12 +12,15 @@ export const defineConfig = (config: XlsxAutoJsonConfigProps) => config
  * @param str 
  * @returns 
  */
-export const escapeSpecialChars = (str: string): string => {
-    const specialCharacters = /(["{}\[\]])/g
-    const result = str?.replace(specialCharacters, '\\$1');
-    return result;
+export const escapeSpecialChars = (inputString: string): string => {
+    return inputString.replace(/(["{}])/g, '\\$1');
 }
 
+/**
+ * 删除转义字符
+ * @param str 
+ * @returns 
+ */
 export const removeSpecialChars = (str: string): string => {
     const specialCharacters = /[-\/\\^$*+?,():|[\]{}]/g;
     const result = str?.replace(specialCharacters, "");
@@ -44,7 +47,7 @@ export function toCamelCaseFromSpace(str: string) {
 }
 
 /**
- * 使用正则表达式去除多余的回车
+ * 去除多余的回车
  * @param input 
  * @returns 
  */

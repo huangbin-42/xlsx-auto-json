@@ -9,11 +9,14 @@ export var defineConfig = function (config) { return config; };
  * @param str
  * @returns
  */
-export var escapeSpecialChars = function (str) {
-    var specialCharacters = /(["{}\[\]])/g;
-    var result = str === null || str === void 0 ? void 0 : str.replace(specialCharacters, '\\$1');
-    return result;
+export var escapeSpecialChars = function (inputString) {
+    return inputString.replace(/(["{}])/g, '\\$1');
 };
+/**
+ * 删除转义字符
+ * @param str
+ * @returns
+ */
 export var removeSpecialChars = function (str) {
     var specialCharacters = /[-\/\\^$*+?,():|[\]{}]/g;
     var result = str === null || str === void 0 ? void 0 : str.replace(specialCharacters, "");
@@ -36,7 +39,7 @@ export function toCamelCaseFromSpace(str) {
     return str === null || str === void 0 ? void 0 : str.replace(/\s(.)/g, function (_, c) { return c.toUpperCase(); });
 }
 /**
- * 使用正则表达式去除多余的回车
+ * 去除多余的回车
  * @param input
  * @returns
  */

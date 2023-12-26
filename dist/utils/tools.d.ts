@@ -10,7 +10,12 @@ export declare const defineConfig: (config: XlsxAutoJsonConfigProps) => XlsxAuto
  * @param str
  * @returns
  */
-export declare const escapeSpecialChars: (str: string) => string;
+export declare const escapeSpecialChars: (inputString: string) => string;
+/**
+ * 删除转义字符
+ * @param str
+ * @returns
+ */
 export declare const removeSpecialChars: (str: string) => string;
 /**
  * 去除空数组
@@ -25,7 +30,7 @@ export declare const filterArray: (array: any[]) => any[];
  */
 export declare function toCamelCaseFromSpace(str: string): string;
 /**
- * 使用正则表达式去除多余的回车
+ * 去除多余的回车
  * @param input
  * @returns
  */
