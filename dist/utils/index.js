@@ -45,7 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { removeExtraLineBreaks, removeSpecialChars, processString } from "../utils/tools.js";
+import { toCamelCaseFromSpace, removeExtraLineBreaks, removeSpecialChars, processString } from "../utils/tools.js";
 import XLSX from 'xlsx';
 import fs from 'fs';
 /**
@@ -53,19 +53,18 @@ import fs from 'fs';
  * @param fromXlsxPath
  * @returns
  */
-export var getXlsx = function (path) {
-    var workbook = XLSX.readFile(path !== null && path !== void 0 ? path : '/');
+export var getXlsx = function (path, file) {
+    var workbook = XLSX.readFile(path);
     var allData = [];
-    console.log(workbook.SheetNames);
-    // 遍历所有工作表
-    workbook.SheetNames.forEach(function (sheetName) {
-        // 获取每个工作表
-        var worksheet = workbook.Sheets[sheetName];
-        // 将工作表转换为 JSON 对象
-        var sheetData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-        console.log('sheetData==>', sheetData);
-        // 将每个工作表的数据添加到数组中
-        allData = allData.concat(sheetData);
+    // 遍历文件下标数组，获取指定的工作表
+    file.forEach(function (sheetIndex) {
+        // 确保下标在工作表名称数组的范围内
+        if (sheetIndex >= 0 && sheetIndex < workbook.SheetNames.length) {
+            var sheetName = workbook.SheetNames[sheetIndex];
+            var worksheet = workbook.Sheets[sheetName];
+            var sheetData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            allData = allData.concat(sheetData);
+        }
     });
     return allData;
 };
@@ -141,7 +140,7 @@ var TranslateItem = /** @class */ (function () {
             var value = valueList[lang.targetIndex];
             keyList === null || keyList === void 0 ? void 0 : keyList.forEach(function (key, index) {
                 var _a, _b, _c;
-                lang.map.set(removeSpecialChars(removeExtraLineBreaks((_a = "".concat(_this._initKey).concat(key)) === null || _a === void 0 ? void 0 : _a.trim())), (_c = processString((_b = value === null || value === void 0 ? void 0 : value[index]) !== null && _b !== void 0 ? _b : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index])) === null || _c === void 0 ? void 0 : _c.trim());
+                lang.map.set(toCamelCaseFromSpace(removeSpecialChars(removeExtraLineBreaks((_a = "".concat(_this._initKey).concat(key)) === null || _a === void 0 ? void 0 : _a.trim()))), (_c = processString((_b = value === null || value === void 0 ? void 0 : value[index]) !== null && _b !== void 0 ? _b : defaultList === null || defaultList === void 0 ? void 0 : defaultList[index])) === null || _c === void 0 ? void 0 : _c.trim());
             });
         });
     };

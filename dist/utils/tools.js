@@ -10,7 +10,7 @@ export var defineConfig = function (config) { return config; };
  * @returns
  */
 export var escapeSpecialChars = function (inputString) {
-    return inputString.replace(/(["{}])/g, '\\$1');
+    return inputString.replace(/(["])/g, '\\$1');
 };
 /**
  * 删除转义字符
@@ -53,7 +53,7 @@ export function removeExtraLineBreaks(input) {
  */
 export var processString = function (inputString) {
     // 添加转义字符
-    var stringWithEscapedChars = inputString === null || inputString === void 0 ? void 0 : inputString.replace(/(["{}])/g, '\\$1');
+    var stringWithEscapedChars = inputString === null || inputString === void 0 ? void 0 : inputString.replace(/(["])/g, '\\$1');
     // 去除多余的回车
     var stringWithoutExtraLineBreaks = stringWithEscapedChars === null || stringWithEscapedChars === void 0 ? void 0 : stringWithEscapedChars.replace(/(\r\n|\n|\r)+/g, '\n');
     return stringWithoutExtraLineBreaks;

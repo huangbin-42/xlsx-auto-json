@@ -51,7 +51,7 @@ import { filterArray } from './utils/tools.js';
                 })];
             case 1:
                 config = (_a.sent()).config;
-                xlsx = filterArray(getXlsx(config.fromXlsxPath));
+                xlsx = filterArray(getXlsx(config.fromXlsxPath, config.defaultFileIndex));
                 translateMap = getTranslateMap(config);
                 translateItem = new TranslateItem({
                     initKey: config.initKey,

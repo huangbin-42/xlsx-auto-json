@@ -14,7 +14,7 @@ import { escapeSpecialChars, filterArray } from './utils/tools.js';
         ]
     })
 
-    const xlsx = filterArray(getXlsx(config.fromXlsxPath))
+    const xlsx = filterArray(getXlsx(config.fromXlsxPath,config.defaultFileIndex))
     const translateMap = getTranslateMap(config)
 
     const translateItem = new TranslateItem({

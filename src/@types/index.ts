@@ -7,7 +7,8 @@ export interface XlsxAutoJsonConfigProps {
     contrastLangIndex: number
     /** 翻译文案未找到时默认文案 */
     defaultValueIndex: number
-
+    /** 默认文件下标 */
+    defaultFileIndex: number[]
     translate: {
         /** 翻译语言 */
         targetLang: string

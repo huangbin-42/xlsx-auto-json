@@ -10,7 +10,7 @@ import fs from 'fs';
  * @param fromXlsxPath
  * @returns
  */
-export declare const getXlsx: (path: string) => any[];
+export declare const getXlsx: (path: string, file: number[]) => any[];
 /**
  * 获取已有翻译json
  * @param config
